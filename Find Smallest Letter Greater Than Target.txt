@@ -1,0 +1,13 @@
+class Solution {
+public:
+    char nextGreatestLetter(vector<char>& letters, char target) {
+        
+        for(int I=0;I<letters.size();I++){
+            if(letters[I]>target){
+               return letters[I];
+            }
+        }
+        return letters[0];
+
+    }
+};
