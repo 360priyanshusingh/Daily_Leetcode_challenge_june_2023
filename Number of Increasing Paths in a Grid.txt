@@ -1,0 +1,37 @@
+class Solution {
+public:
+    int mod=1e9+7;
+    int dfs(int n,int m,vector<vector<int>>& grid,int i,int j,int prev, vector<vector<int>> &dp){
+        if(i<0 || j<0 || i>=n || j>=m || prev>=grid[i][j]){
+            return 0;
+        }
+        if(dp[i][j]!=-1) return dp[i][j];
+
+        int l=dfs(n,m,grid,i+1,j,grid[i][j],dp);
+        int r=dfs(n,m,grid,i,j+1,grid[i][j],dp);
+        int b=dfs(n,m,grid,i-1,j,grid[i][j],dp);
+        int h=dfs(n,m,grid,i,j-1,grid[i][j],dp);
+        dp[i][j] =(1+l+r+b+h)%mod;
+        return dp[i][j];
+       
+    }
+    int countPaths(vector<vector<int>>& grid) {
+        int ans=0;
+        int n=grid.size();
+        int m=grid[0].size();
+        vector<vector<int>> dp(n,vector<int>(m,-1));
+
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(dp[i][j]==-1){
+                    ans+=dfs(n,m,grid,i,j,-1,dp)%mod;
+                }
+                else{
+                    ans=(ans+dp[i][j])%mod;
+                }
+            }
+        }
+
+        return ans;
+    }
+};
