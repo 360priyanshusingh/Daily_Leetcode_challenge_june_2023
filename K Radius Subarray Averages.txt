@@ -1,0 +1,29 @@
+class Solution {
+public:
+    vector<int> getAverages(vector<int>&nums, int k) {
+
+        int n=nums.size();
+        vector<long long >H(n,0);
+        H[0]=nums[0];
+        vector<int> ans;
+      
+        for(int i=1;i<n;i++){
+            H[i]=nums[i]+H[i-1];
+        }
+
+        for(int i=0;i<n;i++){
+            if(i-k>=0  && i+k<n){
+               long long sum = i-k>0? H[i+k]-H[i-k-1]: H[i+k] ; 
+            //    cout<<sum<<" "<<((i+k)-(i-k) +1)<<" "<<(sum)/((i+k)-(i-k) +1)<<endl;
+           
+               
+                ans.push_back((sum)/((i+k)-(i-k) +1));
+            }
+            else{
+                ans.push_back(-1);
+            }
+        }
+
+        return ans;
+    }
+};
