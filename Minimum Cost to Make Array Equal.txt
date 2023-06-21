@@ -1,0 +1,32 @@
+class Solution {
+public
+    long long solve( vectorint& nums, vectorint& cost,int m){
+     long long sum=0;
+     long long n=nums.size();
+        for(int i=0;in;i++){
+            sum+=(long long)( abs(nums[i]-m)) cost[i];
+        }
+
+
+        return sum;
+    }
+    long long minCost(vectorint& nums, vectorint& cost) {
+        long long s=1,e=1000000,y1,y2;
+       while(se){
+
+           int m=(e-s)2 + s;
+           y1=solve(nums,cost,m);
+           y2=solve(nums,cost,m+1);
+
+           if(y1y2){
+               e=m;
+           }
+           else{
+               s=m+1;
+           }
+
+       }
+
+       return min(y1,y2);
+    }
+};
