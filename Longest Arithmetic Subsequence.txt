@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int longestArithSeqLength(vector<int>& nums) {
+        int n=nums.size();
+
+        if(n<=2) return 2;
+        int ans=0;
+         vector<unordered_map<int,int>> v(n+1);
+        for(int i=1;i<n;i++){
+            for(int j=0;j<i;j++){
+                   int diff=nums[i]-nums[j];
+                   v[i][diff]=v[j][diff]+1;
+                   ans=max(ans,v[i][diff]);
+            }
+        }
+
+        return ans +1;
+    }
+};
