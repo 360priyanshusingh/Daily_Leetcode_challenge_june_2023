@@ -1,0 +1,35 @@
+class Solution {
+public: 
+    int mod=1e9+7;
+
+    int solve(vector<int>& locations,int start,int finish,int fule,map<pair<int,int>,int> &dp){
+        
+         if(fule==0 && start!=finish)  return 0;
+
+     
+
+         if(dp.find({start,fule})!=dp.end()){
+             return dp[{start,fule}];
+         }
+
+        int way=0;
+
+        for(int i=0;i<locations.size();i++){
+            if(i!=start && (fule-abs(locations[i]-locations[start]) )>=0){
+                way=(way+solve(locations,i,finish,fule-abs(locations[i]-locations[start]),dp)) % mod;
+            }
+        }
+
+            if( start==finish)  way++; 
+            
+            dp[{start,fule}]=way;
+         return way;
+
+    }
+    int countRoutes(vector<int>& locations, int start, int finish, int fule) {
+
+         map<pair<int,int>,int> dp; 
+         return solve(locations,start,finish,fule,dp);
+         
+    }
+};
